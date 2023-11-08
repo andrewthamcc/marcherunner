@@ -15,18 +15,26 @@
     "@netlify/functions": "^2.0.0",
     "@netlify/remix-adapter": "^2.0.0",
     "@remix-run/react": "^2.2.0",
+    "clsx": "^2.0.0",
     "cross-env": "^7.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "shx": "^0.3.4"
   },
   "devDependencies": {
+    "@prisma/client": "^5.5.2",
     "@remix-run/dev": "^2.2.0",
     "@remix-run/eslint-config": "^2.2.0",
     "@remix-run/serve": "^2.2.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "eslint": "^8.27.0",
+    "jsonwebtoken": "^9.0.2",
+    "jwks-rsa": "^3.1.0",
+    "prisma": "^5.5.2",
+    "remix-auth": "^3.6.0",
+    "remix-auth-auth0": "^1.9.0",
+    "tailwindcss": "^3.3.5",
     "typescript": "^5.2.2"
   },
   "engines": {

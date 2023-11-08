@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+  .container {
+    width: 85%;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+}
+
+@layer base {
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
