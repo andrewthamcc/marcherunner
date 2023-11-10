@@ -13,7 +13,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
   if (authData) {
     const categories = getCategories()
-    const items = getItems(authData.token)
+    const items = getItems(authData.profile.id ?? '')
 
     const data = Promise.all([categories, items])
     return defer({ data })

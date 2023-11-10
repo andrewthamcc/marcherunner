@@ -10,11 +10,11 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
   switch (request.method) {
     case 'GET':
-      return await getItem(params.id, user.token)
+      return await getItem(params.id)
     case 'PUT':
-      return await updateItem(params.id, user.token)
+      return await updateItem(params.id)
     case 'DELETE':
-      return await deleteItem(params.id, user.token)
+      return await deleteItem(params.id)
     default:
       throw new Error('Unexpected error')
   }

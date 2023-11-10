@@ -12,14 +12,11 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     throw new Error('Invalid form data')
 
   if (user)
-    return await createItem(
-      {
-        name,
-        categoryId,
-        userId: user.profile.id as string,
-      },
-      user.token
-    )
+    return await createItem({
+      name,
+      categoryId,
+      userId: user.profile.id as string,
+    })
 
   throw new Error('Please authenticate')
 }

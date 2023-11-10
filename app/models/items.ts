@@ -1,4 +1,3 @@
-import { hasPermission } from './user'
 import { prisma } from '~/db/db'
 
 interface Item {
@@ -7,24 +6,22 @@ interface Item {
   userId: string
 }
 
-export const getItem = async (itemId: string, token: string) => {
-  await hasPermission('read:items', token)
+export const getItem = async (itemId: string) => {
   return prisma.item.findUnique({ where: { id: itemId } })
 }
 
-export const getItems = async (token: string) => {
-  const userId = await hasPermission('read:items', token)
+export const getItems = async (userId: string) => {
   return prisma.item.findMany({ where: { userId } })
 }
 
-export const searchItems = async (name: string, token: string) => {
-  const userId = await hasPermission('read:items', token)
+export const searchItems = async (name: string, userId: string) => {
   return prisma.item.findMany({ where: { userId, name: { contains: name } } })
 }
 
-export const getCategoryItems = async (categoryName: string, token: string) => {
-  const userId = await hasPermission('read:items', token)
-
+export const getCategoryItems = async (
+  categoryName: string,
+  userId: string
+) => {
   const category = await prisma.groceryCategory.findUnique({
     where: { categoryName },
   })
@@ -32,8 +29,7 @@ export const getCategoryItems = async (categoryName: string, token: string) => {
   return prisma.item.findMany({ where: { userId, categoryId: category?.id } })
 }
 
-export const createItem = async (item: Item, token: string) => {
-  await hasPermission('create:item', token)
+export const createItem = async (item: Item) => {
   const { name, categoryId, userId } = item
 
   return prisma.item.create({
@@ -45,9 +41,7 @@ export const createItem = async (item: Item, token: string) => {
   })
 }
 
-export const updateItem = async (itemId: string, token: string) => {
-  await hasPermission('update:item', token)
-
+export const updateItem = async (itemId: string) => {
   const item = await prisma.item.findUnique({ where: { id: itemId } })
   if (!item) throw new Error('That item could not be found.')
 
@@ -61,9 +55,7 @@ export const updateItem = async (itemId: string, token: string) => {
   })
 }
 
-export const deleteItem = async (itemId: string, token: string) => {
-  await hasPermission('delete:item', token)
-
+export const deleteItem = async (itemId: string) => {
   const item = prisma.item.findUnique({ where: { id: itemId } })
   if (!item) throw new Error('That item could not be found.')
 
@@ -74,9 +66,7 @@ export const deleteItem = async (itemId: string, token: string) => {
   })
 }
 
-export const deleteItems = async (items: string[], token: string) => {
-  await hasPermission('delete:items', token)
-
+export const deleteItems = async (items: string[], userId: string) => {
   return prisma.item.deleteMany({
     where: {
       id: {
@@ -86,15 +76,11 @@ export const deleteItems = async (items: string[], token: string) => {
   })
 }
 
-export const deleteAllItems = async (token: string) => {
-  const userId = await hasPermission('delete:allitems', token)
-
+export const deleteAllItems = async (userId: string) => {
   return prisma.item.deleteMany({ where: { userId } })
 }
 
-export const deletePurchasedItems = async (token: string) => {
-  const userId = await hasPermission('delete:purchased', token)
-
+export const deletePurchasedItems = async (userId: string) => {
   return prisma.item.deleteMany({
     where: { userId, purchased: true },
   })

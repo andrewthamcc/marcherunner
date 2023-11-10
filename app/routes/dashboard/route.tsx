@@ -24,7 +24,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
   if (authData) {
     const categories = await getCategories()
-    const items = getItems(authData.token)
+    const items = getItems(authData.profile.id ?? '')
 
     return defer({ categories, items })
   }

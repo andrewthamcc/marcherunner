@@ -8,9 +8,9 @@ interface LoadingSpinnerProps {
 export const LoadingSpinner = ({ variant = 'medium' }: LoadingSpinnerProps) => {
   return (
     <svg
-      className={`animate-spin w-10 ${clsx(variant === 'small' && 'h-5 w-5')}`}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 28 28"
+      className={`animate-spin w-10 ${clsx(variant === 'small' && 'h-5 w-5')}`}
     >
       <defs>
         <linearGradient
