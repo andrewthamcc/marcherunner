@@ -42,7 +42,7 @@ export default function Component() {
   }>()
 
   const { category } = useParams()
-  const fetcher = useFetcher()
+  const { Form } = useFetcher()
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
@@ -94,7 +94,7 @@ export default function Component() {
 
               {pathname === '/dashboard' && (
                 <div className="flex items-center gap-4">
-                  <fetcher.Form
+                  <Form
                     className="flex flex-col items-center justify-center"
                     action="/clear/purchased"
                     method="post"
@@ -117,9 +117,9 @@ export default function Component() {
                     >
                       Clear Purchased
                     </p>
-                  </fetcher.Form>
+                  </Form>
 
-                  <fetcher.Form
+                  <Form
                     className="flex flex-col items-center justify-center"
                     action="/clear/all"
                     method="post"
@@ -141,7 +141,7 @@ export default function Component() {
                     >
                       Empty Cart
                     </p>
-                  </fetcher.Form>
+                  </Form>
                 </div>
               )}
             </div>

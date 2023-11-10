@@ -26,9 +26,9 @@ export const CategoryControls = ({ category }: Props) => {
   const itemInput = useRef<InputHandle>(null)
   const formRef = useRef<HTMLFormElement | null>(null)
 
-  const fetcher = useFetcher()
+  const { Form, state } = useFetcher()
 
-  const isAdding = fetcher.state === 'submitting'
+  const isAdding = state === 'submitting'
   useEffect(() => {
     if (isAdding) setItemName('')
   }, [isAdding])
@@ -54,7 +54,7 @@ export const CategoryControls = ({ category }: Props) => {
           <Symbol className="w-3.5 h-3.5 ml-auto" symbol="add orange" />
         </Button>
       ) : (
-        <fetcher.Form
+        <Form
           className="flex items-center gap-2"
           action="/item/create"
           method="post"
@@ -76,7 +76,7 @@ export const CategoryControls = ({ category }: Props) => {
             ref={itemInput}
             value={itemName}
           />
-          {fetcher.state === 'submitting' ? (
+          {state === 'submitting' ? (
             <LoadingSpinner variant="small" />
           ) : (
             <Button
@@ -103,7 +103,7 @@ export const CategoryControls = ({ category }: Props) => {
               setIsEditing(false)
             }}
           />
-        </fetcher.Form>
+        </Form>
       )}
     </div>
   )

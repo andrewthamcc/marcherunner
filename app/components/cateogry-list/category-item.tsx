@@ -1,4 +1,3 @@
-import clsx from 'clsx'
 import { useFetcher } from '@remix-run/react'
 import { Checkbox, IconButton } from '~/ui'
 import type { Item } from '~/types'
@@ -8,18 +7,11 @@ interface CategoryItemProps {
 }
 
 export const CategoryItem = ({ item }: CategoryItemProps) => {
-  const fetcher = useFetcher()
-  const isDeleting =
-    fetcher.formMethod === 'DELETE' && fetcher.state === 'submitting'
-  const isUpdating =
-    fetcher.formMethod === 'PUT' && fetcher.state === 'submitting'
+  const { Form, submit, state } = useFetcher()
+  const isUpdating = state === 'submitting'
 
   return (
-    <li
-      className={`flex items-center justify-between ml-1 ${clsx(
-        isDeleting && 'hidden'
-      )}`}
-    >
+    <li className="flex items-center justify-between ml-1">
       <Checkbox
         checked={item.purchased}
         id={item.id}
@@ -27,10 +19,10 @@ export const CategoryItem = ({ item }: CategoryItemProps) => {
         loading={isUpdating}
         name={item.id}
         onChange={() =>
-          fetcher.submit(null, { action: `/item/${item.id}`, method: 'PUT' })
+          submit(null, { action: `/item/${item.id}`, method: 'PUT' })
         }
       />
-      <fetcher.Form action={`/item/${item.id}`} method="DELETE">
+      <Form action={`/item/${item.id}`} method="DELETE">
         <IconButton
           a11ylabel="Delete Item"
           className="category-item-delete"
@@ -38,7 +30,7 @@ export const CategoryItem = ({ item }: CategoryItemProps) => {
           size="small"
           submit
         />
-      </fetcher.Form>
+      </Form>
     </li>
   )
 }
