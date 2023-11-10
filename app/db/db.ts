@@ -11,10 +11,9 @@ declare global {
 
 const env = process.env.NODE_ENV || 'development'
 const url =
-  // env === 'development'
-  //   ? process.env.DATABASE_DEV_URL
-  // :
-  process.env.DATABASE_URL
+  env === 'development'
+    ? process.env.DATABASE_DEV_URL
+    : process.env.DATABASE_URL
 
 // this is needed because in development we don't want to restart
 // the server with every change, but we want to make sure we don't
