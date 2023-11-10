@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { Icon, Text } from '..'
-import { useOutsideClick } from '../../hooks'
+import { useOutsideClick } from '../../hooks/use-outside-click'
 import { DropdownList } from './dropdown-list'
 
 export interface DropItem {

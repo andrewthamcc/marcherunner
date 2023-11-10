@@ -1,4 +1,4 @@
-import type { MetaFunction } from "@remix-run/node";
+import type { MetaFunction } from '@remix-run/node'
 import {
   Link,
   Links,
@@ -9,24 +9,24 @@ import {
   ScrollRestoration,
   isRouteErrorResponse,
   useRouteError,
-} from "@remix-run/react";
-import { LinksFunction } from "@remix-run/react/dist/routeModules";
-import stylesheet from "~/tailwind.css";
+} from '@remix-run/react'
+import { LinksFunction } from '@remix-run/react/dist/routeModules'
+import stylesheet from '~/tailwind.css'
 
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: stylesheet },
-];
+  { rel: 'stylesheet', href: stylesheet },
+]
 
 export const meta: MetaFunction = () => [
   {
-    charset: "utf-8",
-    title: "MarchéRunner",
-    viewport: "width=device-width,initial-scale=1",
+    charset: 'utf-8',
+    title: 'MarchéRunner',
+    viewport: 'width=device-width,initial-scale=1',
   },
-];
+]
 
 export function ErrorBoundary() {
-  const error = useRouteError();
+  const error = useRouteError()
   return (
     <html>
       <head>
@@ -41,7 +41,7 @@ export function ErrorBoundary() {
               ? `${error.status} ${error.statusText}`
               : error instanceof Error
               ? error.message
-              : "Unknown Error"}
+              : 'Unknown Error'}
           </h1>
           <Link className="mt-6 block text-lg hover:underline" to="/">
             Home
@@ -50,7 +50,7 @@ export function ErrorBoundary() {
         <Scripts />
       </body>
     </html>
-  );
+  )
 }
 
 export default function App() {
@@ -67,5 +67,5 @@ export default function App() {
         <LiveReload />
       </body>
     </html>
-  );
+  )
 }

@@ -12,7 +12,7 @@ import {
   useParams,
 } from '@remix-run/react'
 import { auth } from '~/auth/auth.server'
-import { Layout } from '~/layout'
+import { Layout } from '~/layout/layout'
 import { CategoryIcon, Dropdown, IconButton, LoadingSpinner } from '~/ui'
 import type { CategoryVariants, DropItem } from '~/ui'
 import { getCategories, getItems } from '~/models'
@@ -20,11 +20,11 @@ import { getCategoryTitle } from '~/utils/get-category-title'
 import type { Category, Item } from '~/types'
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const authData = await auth.isAuthenticated(request)
+  const user = await auth.isAuthenticated(request)
 
-  if (authData) {
+  if (user) {
     const categories = await getCategories()
-    const items = getItems(authData.profile.id ?? '')
+    const items = getItems(user.profile.id ?? '')
 
     return defer({ categories, items })
   }
@@ -36,13 +36,17 @@ export default function Component() {
   const [selectedCategory, setSelectedCategory] = useState<DropItem | null>(
     null
   )
-  const { categories, items } = useLoaderData()
+  const { categories, items } = useLoaderData<{
+    categories: Category[]
+    items: Item[]
+  }>()
+
   const { category } = useParams()
   const fetcher = useFetcher()
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
-  const dropdownList = (categories as Category[])
+  const dropdownList = categories
     .filter((c) => c.categoryName !== 'list')
     .map((c) => ({
       icon: <CategoryIcon icon={c.categoryName as CategoryVariants} />,
@@ -67,7 +71,7 @@ export default function Component() {
       }
     >
       <Await resolve={items}>
-        {(items: Item[]) => (
+        {(items) => (
           <Layout isAuthenticated>
             <div className="container flex gap-4 items-center justify-between my-8">
               {selectedCategory && (

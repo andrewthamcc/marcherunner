@@ -1,8 +1,8 @@
+import dotenv from 'dotenv'
 import path from 'path'
 import { Authenticator } from 'remix-auth'
 import type { Auth0Profile } from 'remix-auth-auth0'
 import { Auth0Strategy } from 'remix-auth-auth0'
-import dotenv from 'dotenv'
 import { sessionStorage } from '~/auth/session'
 dotenv.config({ path: path.resolve('./.env') })
 

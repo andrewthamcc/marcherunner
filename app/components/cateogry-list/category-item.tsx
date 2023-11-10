@@ -9,7 +9,8 @@ interface CategoryItemProps {
 
 export const CategoryItem = ({ item }: CategoryItemProps) => {
   const fetcher = useFetcher()
-  const isDeleting = fetcher?.submission?.method === 'DELETE'
+  const isDeleting =
+    fetcher.formMethod === 'DELETE' && fetcher.state === 'submitting'
   const isUpdating =
     fetcher.formMethod === 'PUT' && fetcher.state === 'submitting'
 

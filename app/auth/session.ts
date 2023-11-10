@@ -1,6 +1,6 @@
+import dotenv from 'dotenv'
 import path from 'path'
 import { createCookieSessionStorage } from '@remix-run/node'
-import dotenv from 'dotenv'
 dotenv.config({ path: path.resolve('./.env') })
 
 export const sessionStorage = createCookieSessionStorage({

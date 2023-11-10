@@ -66,16 +66,6 @@ export const deleteItem = async (itemId: string) => {
   })
 }
 
-export const deleteItems = async (items: string[], userId: string) => {
-  return prisma.item.deleteMany({
-    where: {
-      id: {
-        in: items,
-      },
-    },
-  })
-}
-
 export const deleteAllItems = async (userId: string) => {
   return prisma.item.deleteMany({ where: { userId } })
 }

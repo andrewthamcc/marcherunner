@@ -2,7 +2,7 @@ import type { ActionFunctionArgs } from '@remix-run/node'
 import { useSubmit } from '@remix-run/react'
 import { auth } from '~/auth/auth.server'
 import { Button, Text } from '~/ui'
-import { Layout } from '~/layout'
+import { Layout } from '~/layout/layout'
 
 export const meta = () => [{ title: 'MarcheRunner' }]
 

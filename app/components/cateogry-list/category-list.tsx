@@ -1,5 +1,6 @@
 import clsx from 'clsx'
-import { CategoryControls, CategoryItem } from './components'
+import { CategoryControls } from './category-controls'
+import { CategoryItem } from './category-item'
 import type { Item, Category } from '~/types'
 import { Text } from '~/ui'
 

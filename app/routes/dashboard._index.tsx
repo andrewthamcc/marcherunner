@@ -9,11 +9,11 @@ import { CategoryList } from '~/components'
 import type { Category, Item } from '~/types'
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const authData = await auth.isAuthenticated(request)
+  const user = await auth.isAuthenticated(request)
 
-  if (authData) {
+  if (user) {
     const categories = getCategories()
-    const items = getItems(authData.profile.id ?? '')
+    const items = getItems(user.profile.id ?? '')
 
     const data = Promise.all([categories, items])
     return defer({ data })
@@ -23,7 +23,9 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 }
 
 export default function Component() {
-  const { data } = useLoaderData()
+  const { data } = useLoaderData<{
+    data: [category: Category[], item: Item[]]
+  }>()
 
   return (
     <Suspense
@@ -34,7 +36,7 @@ export default function Component() {
       }
     >
       <Await resolve={data}>
-        {([categories, items]: [categories: Category[], item: Item[]]) => (
+        {([categories, items]) => (
           <div className="container">
             <div className="grid lg:grid-cols-3 lg:gap-x-8 gap-y-20 mb-8">
               {categories
