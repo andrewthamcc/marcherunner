@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 import { defer, redirect } from '@remix-run/node'
-import type { LoaderArgs } from '@remix-run/node'
+import type { LoaderFunctionArgs } from '@remix-run/node'
 import { Await, useLoaderData } from '@remix-run/react'
 import { auth } from '~/auth/auth.server'
 import { LoadingSpinner } from '~/ui'
@@ -8,7 +8,7 @@ import { getCategories, getItems } from '~/models'
 import { CategoryList } from '~/components'
 import type { Category, Item } from '~/types'
 
-export const loader = async ({ request }: LoaderArgs) => {
+export const loader = async ({ request }: LoaderFunctionArgs) => {
   const authData = await auth.isAuthenticated(request)
 
   if (authData) {
@@ -33,7 +33,7 @@ export default function Component() {
         </div>
       }
     >
-      <Await errorElement={<p>oh no</p>} resolve={data}>
+      <Await resolve={data}>
         {([categories, items]: [categories: Category[], item: Item[]]) => (
           <div className="container">
             <div className="grid lg:grid-cols-3 lg:gap-x-8 gap-y-20 mb-8">

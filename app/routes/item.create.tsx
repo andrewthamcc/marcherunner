@@ -1,8 +1,8 @@
-import type { ActionArgs } from '@remix-run/node'
+import type { ActionFunctionArgs } from '@remix-run/node'
 import { auth } from '~/auth/auth.server'
 import { createItem } from '~/models/items'
 
-export const action = async ({ request }: ActionArgs) => {
+export const action = async ({ request }: ActionFunctionArgs) => {
   const user = await auth.isAuthenticated(request)
   const formData = await request.formData()
   const name = formData.get('name')

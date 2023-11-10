@@ -1,8 +1,8 @@
-import type { ActionArgs } from '@remix-run/node'
+import type { ActionFunctionArgs } from '@remix-run/node'
 import { auth } from '~/auth/auth.server'
 import { deleteItem, getItem, updateItem } from '~/models/items'
 
-export const action = async ({ request, params }: ActionArgs) => {
+export const action = async ({ request, params }: ActionFunctionArgs) => {
   const user = await auth.isAuthenticated(request)
 
   if (!params.id) throw new Error('Invalid request')

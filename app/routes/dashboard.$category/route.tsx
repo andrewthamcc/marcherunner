@@ -1,13 +1,13 @@
 import { Suspense } from 'react'
 import { defer, redirect } from '@remix-run/node'
-import type { LoaderArgs } from '@remix-run/node'
+import type { LoaderFunctionArgs } from '@remix-run/node'
 import { Await, useLoaderData } from '@remix-run/react'
 import { auth } from '~/auth/auth.server'
 import { LoadingSpinner } from '~/ui'
 import { getCategory, getCategoryItems } from '~/models'
 import { CategoryList } from '~/components'
 
-export const loader = async ({ request, params }: LoaderArgs) => {
+export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const authData = await auth.isAuthenticated(request)
   if (typeof params.category !== 'string') throw new Error('Invalid request')
 
@@ -33,7 +33,7 @@ export default function Component() {
         </div>
       }
     >
-      <Await errorElement={<p>oh no</p>} resolve={data}>
+      <Await resolve={data}>
         {([category, items]) => (
           <div className="container">
             <CategoryList

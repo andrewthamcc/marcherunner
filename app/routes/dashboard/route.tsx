@@ -66,7 +66,7 @@ export default function Component() {
         </Layout>
       }
     >
-      <Await errorElement={<p>oh no</p>} resolve={items}>
+      <Await resolve={items}>
         {(items: Item[]) => (
           <Layout isAuthenticated>
             <div className="container flex gap-4 items-center justify-between my-8">
