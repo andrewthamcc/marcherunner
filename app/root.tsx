@@ -21,7 +21,7 @@ export const meta: MetaFunction = () => [
   {
     charset: 'utf-8',
     title: 'MarchéRunner',
-    viewport: 'width=device-width,initial-scale=1',
+    author: 'Andrew Tham',
   },
 ]
 
@@ -57,6 +57,7 @@ export default function App() {
   return (
     <html lang="en">
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <Meta />
         <Links />
       </head>
