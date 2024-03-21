@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import type { MetaFunction } from '@remix-run/node'
 import {
   Link,
@@ -9,12 +10,16 @@ import {
   ScrollRestoration,
   isRouteErrorResponse,
   useRouteError,
+  useNavigation,
 } from '@remix-run/react'
 import { LinksFunction } from '@remix-run/react/dist/routeModules'
+import nProgress from 'nprogress'
+import nProgressStyles from 'nprogress/nprogress.css'
 import stylesheet from '~/tailwind.css'
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: stylesheet },
+  { rel: 'stylesheet', href: nProgressStyles },
 ]
 
 export const meta: MetaFunction = () => [
@@ -26,6 +31,10 @@ export const meta: MetaFunction = () => [
 ]
 
 export function ErrorBoundary() {
+  useEffect(() => {
+    nProgress.done()
+  }, [])
+
   const error = useRouteError()
   return (
     <html>
@@ -54,6 +63,17 @@ export function ErrorBoundary() {
 }
 
 export default function App() {
+  const navigation = useNavigation()
+
+  useEffect(() => {
+    if (navigation.state === 'loading' || navigation.state === 'submitting') {
+      nProgress.configure({ showSpinner: false })
+      nProgress.start()
+    } else {
+      nProgress.done()
+    }
+  }, [navigation.state])
+
   return (
     <html lang="en">
       <head>
