@@ -1,4 +1,3 @@
-import React from 'react'
 import type { IconVariants } from '../icon'
 import { Icon } from '../icon'
 import { Button } from '../button'

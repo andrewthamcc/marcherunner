@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
+import { useEffect } from 'react'
 import { DropdownItem } from './dropdown-item'
 import type { DropItem } from './dropdown'
 

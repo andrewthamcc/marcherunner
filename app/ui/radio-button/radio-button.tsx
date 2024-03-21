@@ -1,4 +1,3 @@
-import React from 'react'
 import { Symbol } from '../symbol'
 
 export interface RadioButtonProps {

@@ -3,7 +3,7 @@ import { Symbol } from '../symbol'
 import { LoadingSpinner } from '../loading-spinner'
 
 export interface CheckboxProps {
-  checked: boolean // boolean for marking checked
+  checked: boolean
   className?: string
   disabled?: boolean
   id?: string // id for input required if labels are being used
